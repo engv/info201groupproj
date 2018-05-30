@@ -5,10 +5,6 @@ library(DT)
 source("wrangle.R")
 
 server <- function(input, output) {
-  # output$graph <- renderPlotly({
-  #   graph.personalities(personalities, input$select.x, input$select.y)
-  # })
-  
   output$age_plot <- renderPlot({
     age_data <- filter(personalities_results, age <= input$age)
     ggplot(age_data, aes(x = traits, y = age, color = age)) +
