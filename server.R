@@ -31,8 +31,6 @@ server <- function(input, output) {
     hover = TRUE,
     stripe = FALSE,
     serverSide = TRUE))
-  
-  
 }
 
 shinyServer(server)

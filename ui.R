@@ -116,13 +116,6 @@ There are a total of", tags$strong("19,719"), "entries that were recorded."),
     mainPanel(
         DTOutput("page_table")
     )
-  ),
-  
-  tabPanel(
-    titlePanel("Personality Test Data"),
-    mainPanel(
-      DTOutput("results_table")
-    )
   )
 ))
 

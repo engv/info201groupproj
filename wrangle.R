@@ -105,4 +105,3 @@ data_table <-
   mutate(source=replace(source, source==4, "Any .edu Url")) %>%
   mutate(source=replace(source, source==5, "Other")) %>%
   mutate(source=replace(source, source==6, "Not Provided"))
-
