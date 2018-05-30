@@ -13,3 +13,10 @@ The **IPIP** is an international non-profit organization that compiles personali
 
 # Technical Description
 In order to read in our data, we will be calling on read.csv since it is in a nice csv file format. In terms of data-wrangling, we will need to filter the data . We expect to be using the _shiny library_ as well as either _ggplot2_ or _plotly_. As for anticipating future bottlenecks, interpreting the raw data may be a challenge, as the raw data format is a little confusing and doesn't reveal obvious information. Also, missing information in each column might challenging to work around.
+
+
+O - Pragmatic
+C - Unconscientious
+E - Introvert
+A - Disagreeable
+N - Secures
