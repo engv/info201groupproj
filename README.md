@@ -19,4 +19,4 @@ O - Pragmatic
 C - Unconscientious
 E - Introvert
 A - Disagreeable
-N - Secures
+N - Secure
