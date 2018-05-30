@@ -19,7 +19,33 @@ ui <- fluidPage(navbarPage(theme = "stylesheet.css",
   # ),
   tabPanel(
     titlePanel(tags$h2("Introduction to the Big 5 Personalities")),
-    mainPanel(
+    mainPanel(tags$p("We chose to dive deeper in the raw answers to the Big Five
+Personality Test, constructed with items from the International Personality 
+Item Pool. These results come from", tags$strong("\'The Big Five\' factors-"), " 
+(1) Extraversion vs Introversion, 
+(2) Agreeableness vs Disagreeableness, (3) Conscientiousness vs 
+Unconscientiousness, 
+(4) Conscientious vs Unconscientious, and (5) Openness vs Pragmatic and its 
+scoring 
+is in the direction of positivley or negatively correlated with the dominant 
+trait. 
+It asks a total of 50 questions to decern 5 factors, which is slightly different
+than
+the traditional Myers-Briggs personality types (MBTI) that only tested for four 
+different traits. This data set also collects some additional information on the
+users of this survey. 
+Data such as race, age, english as first language: engnat, gender, 
+dominant hand, 
+how the participant located the test: source, and country of origin were
+included 
+along with the corresponding personality test results.
+There are a total of", tags$strong("19,719"), "entries that were recorded."),
+
+      tags$p("The **IPIP** is an international non-profit organization that 
+compiles personality data around the world. We aim for our target audience to be 
+      those who have either already taken the personality test, and those who are 
+      interested in learning more about the distribution of different personality 
+      traits regarding the Big Five Personality Test."),
       tags$p("Big five personality traits: often shaped by our environment and
               biological traits— products of nature and nuture! Keep in mind 
               that these dimensions represent general groupings of 
