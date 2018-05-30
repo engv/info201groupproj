@@ -1,8 +1,7 @@
 library(dplyr)
 library(ggplot2)
 library(treemap)
-#library(ggplotify)
-#library(treemapify)
+library(DT)
 
 personalities <- read.csv(
   file = "BIG5/data.csv", header = TRUE, sep = "",
@@ -74,35 +73,6 @@ female <- filter(personalities_results, gender == "2") %>%
   group_by(traits) %>%
   summarise(f_count = n())
 both <- full_join(male, female) %>% mutate(total_count = f_count + m_count)
-#both$label <- paste(both$traits, both$)
-
-# in the drop down just subsitute each dataframe as listed above
-male_distribution <- treemap(male,
-  index = "traits",
-  vSize = "m_count",
-  type = "index",
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
-
-female_distribution <- treemap(female,
-  index = "traits",
-  vSize = "f_count",
-  type = "index", 
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
-
-both_distribution <- treemap(both,
-  index = "traits",
-  vSize = "total_count",
-  type = "index",
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
 
 # both_tree <- treemapify(both,
 #                         area = "total_count", fill = "traits",

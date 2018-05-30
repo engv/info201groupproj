@@ -1,5 +1,6 @@
 library(shiny)
 library(plotly)
+library(DT)
 source("wrangle.R")
 
 gender_choices <- colnames(both)
@@ -20,6 +21,8 @@ ui <- fluidPage(navbarPage(theme = "stylesheet.css",
   tabPanel(
     titlePanel(tags$h2("Introduction to the Big 5 Personalities")),
     mainPanel(
+      tags$img(src = "pentagon.png", alt = "Big 5",
+           style = "display: block; margin-left: auto; margin-right: auto;"),
       tags$p("Big five personality traits: often shaped by our environment and
               biological traits— products of nature and nuture! Keep in mind 
               that these dimensions represent general groupings of 

@@ -1,6 +1,7 @@
 library(dplyr)
 library(plotly)
 library(ggplot2)
+library(DT)
 source("wrangle.R")
 
 server <- function(input, output) {
