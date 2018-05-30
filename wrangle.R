@@ -1,8 +1,8 @@
 library(dplyr)
 library(ggplot2)
 library(treemap)
-library(ggplotify)
-library(treemapify)
+#library(ggplotify)
+#library(treemapify)
 
 personalities <- read.csv(
   file = "BIG5/data.csv", header = TRUE, sep = "",
