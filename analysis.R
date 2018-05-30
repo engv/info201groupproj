@@ -24,7 +24,22 @@ value[1, 1] = "NA"
 # treemap of different countries participants represent
 country_origin <- treemap(value,
         index="country",
-        vSize="count",
+        vSize="count")
+
+
+#data.table 1.8.0  For help type: help("data.table")
+
+by_unique <- personalities[,list(sale=sum(sale), profit=sum(profit)), by=unique_countries]
+
+# Create data
+group= unique_countries
+value=c(13,5,22)
+data=data.frame(group,value)
+
+
+# treemap
+treemap(data,
+        index="unique_countries",
+        vSize="value",
         type="index"
 )
-
