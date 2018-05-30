@@ -1,12 +1,9 @@
 library(dplyr)
 library(plotly)
 library(ggplot2)
+library(RColorBrewer)
 source("wrangle.R")
-
 server <- function(input, output) {
-  # output$graph <- renderPlotly({
-  #   graph.personalities(personalities, input$select.x, input$select.y)
-  # })
   
   output$age_plot <- renderPlot({
     age_data <- filter(personalities_results, age <= input$age)
@@ -17,6 +14,7 @@ server <- function(input, output) {
       ggtitle("What Personality Types Are Common Among Different Age Groups?")
   })
   
+  
   output$gender_plot <- renderPlot({
     treemap(both, index = "traits", vSize = toString(input$gender),
             type = "index", position.legend = "right",
@@ -24,6 +22,6 @@ server <- function(input, output) {
             title = "Distribution of Personalities by Gender",
             fontsize.labels = 10)
   })
-}
+    }
 
 shinyServer(server)
