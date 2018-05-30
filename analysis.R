@@ -32,7 +32,6 @@ value <- group_by(personalities, country) %>%
   summarise(count=n())
 
 
-
 #data.table 1.8.0  For help type: help("data.table")
 
 by_unique <- personalities[,list(sale=sum(sale), profit=sum(profit)), by=unique_countries]
@@ -41,6 +40,7 @@ by_unique <- personalities[,list(sale=sum(sale), profit=sum(profit)), by=unique_
 group= unique_countries
 value=c(13,5,22)
 data=data.frame(group,value)
+
 
 # treemap
 treemap(data,

@@ -49,7 +49,8 @@ results <- data.frame(
   result_a = ifelse(personalities_results$is_a == TRUE, "A", "D"),
   result_c = ifelse(personalities_results$is_c == TRUE, "C", "U"),
   result_n = ifelse(personalities_results$is_n == TRUE, "N", "S"),
-  result_o = ifelse(personalities_results$is_o == TRUE, "O", "P")) %>%
-  mutate(traits = paste(results$result_e, results$result_a, results$result_c,
-                        results$result_n, results$result_o))
+  result_o = ifelse(personalities_results$is_o == TRUE, "O", "P"))
+results <- mutate(results, traits = paste(results$result_e, results$result_a,
+                                          results$result_c, results$result_n,
+                                          results$result_o))
 personalities_results <- mutate(personalities_results, traits = results$traits)
