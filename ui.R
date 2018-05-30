@@ -9,7 +9,7 @@ shinyUI(navbarPage(
     sidebarLayout(sidebarPanel("Select age and race",
       selectInput("select.x",
                   label = "Select age"
-        mainPanel("Comparison Graph" , style = "color: gray",
+        mainPanel(
                   plotlyOutput("graph")))
     )
     )
