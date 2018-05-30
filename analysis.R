@@ -8,11 +8,10 @@ library(treemap)
 # load in data set
 personalities <- read.csv(file = "BIG5/data.csv", header=TRUE, sep="",
                           stringsAsFactors = F)
-# dataset containing just other info
+# dataset containing just other info besides personality traits
 other_info <- personalities[, c("race", "age", "engnat", "gender", "hand", "source", "country")]
 # what is the average age of survey takers?
 under_30 <- nrow(filter(other_info, age < 30))
-
 
 # make dataframe listing unique countries and frequency
 unique_countries <- unique(other_info$country)
@@ -23,7 +22,7 @@ value[1, 1] = "NA"
             
 
 # treemap of different countries participants represent
-treemap(value,
+country_origin <- treemap(value,
         index="country",
         vSize="count",
         type="index"
