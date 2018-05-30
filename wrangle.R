@@ -2,12 +2,15 @@ library(dplyr)
 library(ggplot2)
 library(treemap)
 library(ggplotify)
+library(DT)
+library(dplyr)
 library(treemapify)
 
 personalities <- read.csv(
   file = "BIG5/data.csv", header = TRUE, sep = "",
   stringsAsFactors = F
 )
+
 num_satisfy_pos <- function(df) {
   df <- mutate(df, satisfy_pos = rowSums(df > 3))
   df
@@ -73,62 +76,31 @@ male <- filter(personalities_results, gender == "1") %>%
 female <- filter(personalities_results, gender == "2") %>%
   group_by(traits) %>%
   summarise(f_count = n())
-both <- full_join(male, female) %>% mutate(total_count = f_count + m_count)
-#both$label <- paste(both$traits, both$)
 
-# in the drop down just subsitute each dataframe as listed above
-male_distribution <- treemap(male,
-  index = "traits",
-  vSize = "m_count",
-  type = "index",
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
+data_table <- select(personalities, -engnat, -hand)
 
-female_distribution <- treemap(female,
-  index = "traits",
-  vSize = "f_count",
-  type = "index", 
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
-
-both_distribution <- treemap(both,
-  index = "traits",
-  vSize = "total_count",
-  type = "index",
-  position.legend = "right",
-  title.legend = "32 Personality Types",
-  title = "Distribution of Personalities by Gender" 
-)
-
-# both_tree <- treemapify(both,
-#                         area = "total_count", fill = "traits",
-#                         label = "traits", group = "total_count")
-# both_plot <- ggplotify(both_tree) +
-#   scale_x_continuous(expand = c(0, 0)) +
-#   scale_y_continuous(expand = c(0, 0)) +
-#   scale_fill_brewer(palette = "Dark2")
-
-## waffle chart to display all different frequencies of each personality
-# ggplot(personalities_results, aes(x = x, y = y, fill = category)) +
-#   geom_tile(color = "black", size = 0.5) +
-#   scale_x_continuous(expand = c(0, 0)) +
-#   scale_y_continuous(expand = c(0, 0), trans = "reverse") +
-#   scale_fill_brewer(palette = "Set3") +
-#   labs(
-#     title = "Waffle Chart", subtitle = "'Class' of vehicles",
-#     caption = "Source: mpg"
-#   ) +
-#   theme(
-#     panel.border = element_rect(size = 2),
-#     plot.title = element_text(size = rel(1.2)),
-#     axis.text = element_blank(),
-#     axis.title = element_blank(),
-#     axis.ticks = element_blank(),
-#     legend.title = element_blank(),
-#     legend.position = "right"
-#   )
-
+data_table <- 
+  data_table %>%
+  filter(age<=120) %>%
+  mutate(race=replace(race, race==1, "Mixed Race")) %>%
+  mutate(race=replace(race, race==2, "Arctic")) %>%
+  mutate(race=replace(race, race==3, "Caucasian (European)")) %>%
+  mutate(race=replace(race, race==4, "Caucasian (Indian)")) %>%
+  mutate(race=replace(race, race==5, "Caucasian (Middle East)")) %>%
+  mutate(race=replace(race, race==6, "Caucasian (North African)")) %>%
+  mutate(race=replace(race, race==7, "Indigenous Australian")) %>%
+  mutate(race=replace(race, race==8, "Native American")) %>%
+  mutate(race=replace(race, race==9, "North East Asian")) %>%
+  mutate(race=replace(race, race==10, "Pacific")) %>%
+  mutate(race=replace(race, race==11, "South East Asian")) %>%
+  mutate(race=replace(race, race==12, "West African, Bushmen, Ethiopian")) %>%
+  mutate(race=replace(race, race==13, "Other")) %>%
+  mutate(gender=replace(gender, gender==1, "Male")) %>%
+  mutate(gender=replace(gender, gender==2, "Female")) %>%
+  mutate(gender=replace(gender, gender==3, "Other")) %>%
+  mutate(source=replace(source, source==1, "Test Website")) %>%
+  mutate(source=replace(source, source==2, "Google")) %>%
+  mutate(source=replace(source, source==3, "Facebook")) %>%
+  mutate(source=replace(source, source==4, "Any .edu Url")) %>%
+  mutate(source=replace(source, source==5, "Other")) %>%
+  mutate(source=replace(source, source==6, "Not Provided"))

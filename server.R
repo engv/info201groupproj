@@ -24,6 +24,17 @@ server <- function(input, output) {
             title = "Distribution of Personalities by Gender",
             fontsize.labels = 10)
   })
+  
+  output$page_table = renderDT(data_table, 
+    options = list(
+    columnDefs = list(list(className = 'dt-center', targets = 5)),
+    pageLength = 10,
+    lengthMenu = c(5, 10, 15, 20),
+    hover = TRUE,
+    stripe = FALSE,
+    serverSide = TRUE))
+  
+  
 }
 
 shinyServer(server)

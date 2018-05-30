@@ -1,5 +1,6 @@
 library(shiny)
 library(plotly)
+library(DT)
 source("wrangle.R")
 
 gender_choices <- colnames(both)
@@ -46,6 +47,19 @@ ui <- navbarPage(
       mainPanel(
         plotOutput("gender_plot")
       )
+    )
+  ),
+  tabPanel(
+    titlePanel("Personality Test Data"),
+    mainPanel(
+        DTOutput("page_table")
+    )
+  ),
+  
+  tabPanel(
+    titlePanel("Personality Test Data"),
+    mainPanel(
+      DTOutput("results_table")
     )
   )
 )
