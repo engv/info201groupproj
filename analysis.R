@@ -29,7 +29,7 @@ country_origin <- treemap(value,
 
 #data.table 1.8.0  For help type: help("data.table")
 
-by_unique <- personalities[,list(sale=sum(sale), profit=sum(profit)), by=unique_countries]
+#by_unique <- personalities[,list(sale=sum(sale), profit=sum(profit)), by=unique_countries]
 
 # Create data
 group= unique_countries

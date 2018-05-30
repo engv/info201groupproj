@@ -1,4 +1,8 @@
 library(dplyr)
+library(ggplot2)
+library(treemap)
+library(ggplotify)
+library(treemapify)
 
 personalities <- read.csv(
   file = "BIG5/data.csv", header = TRUE, sep = "",
@@ -57,8 +61,7 @@ results <- data.frame(
 results <- mutate(results, traits = paste(
   results$result_e, results$result_a,
   results$result_c, results$result_n,
-  results$result_o
-))
+  results$result_o))
 personalities_results <- mutate(personalities_results, traits = results$traits)
 
 # filter by gender drop down, most common personality type of males = 1,
@@ -66,18 +69,17 @@ personalities_results <- mutate(personalities_results, traits = results$traits)
 unique_person <- unique(personalities_results$traits)
 male <- filter(personalities_results, gender == "1") %>%
   group_by(traits) %>%
-  summarise(count = n())
+  summarise(m_count = n())
 female <- filter(personalities_results, gender == "2") %>%
   group_by(traits) %>%
-  summarise(count = n())
-both <- filter(personalities_results, gender == "1" && gender == "2") %>%
-  group_by(traits) %>%
-  summarise(count = n())
+  summarise(f_count = n())
+both <- full_join(male, female) %>% mutate(total_count = f_count + m_count)
+#both$label <- paste(both$traits, both$)
 
 # in the drop down just subsitute each dataframe as listed above
 male_distribution <- treemap(male,
   index = "traits",
-  vSize = "count",
+  vSize = "m_count",
   type = "index",
   position.legend = "right",
   title.legend = "32 Personality Types",
@@ -86,7 +88,7 @@ male_distribution <- treemap(male,
 
 female_distribution <- treemap(female,
   index = "traits",
-  vSize = "count",
+  vSize = "f_count",
   type = "index", 
   position.legend = "right",
   title.legend = "32 Personality Types",
@@ -95,29 +97,38 @@ female_distribution <- treemap(female,
 
 both_distribution <- treemap(both,
   index = "traits",
-  vSize = "count",
+  vSize = "total_count",
   type = "index",
   position.legend = "right",
   title.legend = "32 Personality Types",
   title = "Distribution of Personalities by Gender" 
 )
 
+# both_tree <- treemapify(both,
+#                         area = "total_count", fill = "traits",
+#                         label = "traits", group = "total_count")
+# both_plot <- ggplotify(both_tree) +
+#   scale_x_continuous(expand = c(0, 0)) +
+#   scale_y_continuous(expand = c(0, 0)) +
+#   scale_fill_brewer(palette = "Dark2")
+
 ## waffle chart to display all different frequencies of each personality
-ggplot(personalities_results, aes(x = x, y = y, fill = category)) +
-  geom_tile(color = "black", size = 0.5) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0), trans = "reverse") +
-  scale_fill_brewer(palette = "Set3") +
-  labs(
-    title = "Waffle Chart", subtitle = "'Class' of vehicles",
-    caption = "Source: mpg"
-  ) +
-  theme(
-    panel.border = element_rect(size = 2),
-    plot.title = element_text(size = rel(1.2)),
-    axis.text = element_blank(),
-    axis.title = element_blank(),
-    axis.ticks = element_blank(),
-    legend.title = element_blank(),
-    legend.position = "right"
-  )
+# ggplot(personalities_results, aes(x = x, y = y, fill = category)) +
+#   geom_tile(color = "black", size = 0.5) +
+#   scale_x_continuous(expand = c(0, 0)) +
+#   scale_y_continuous(expand = c(0, 0), trans = "reverse") +
+#   scale_fill_brewer(palette = "Set3") +
+#   labs(
+#     title = "Waffle Chart", subtitle = "'Class' of vehicles",
+#     caption = "Source: mpg"
+#   ) +
+#   theme(
+#     panel.border = element_rect(size = 2),
+#     plot.title = element_text(size = rel(1.2)),
+#     axis.text = element_blank(),
+#     axis.title = element_blank(),
+#     axis.ticks = element_blank(),
+#     legend.title = element_blank(),
+#     legend.position = "right"
+#   )
+
