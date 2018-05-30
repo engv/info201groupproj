@@ -32,6 +32,11 @@ o_pos_key <- select(personalities, O1, O3, O5, O7, O8, O9, O10) %>%
   num_satisfy_pos()
 o_neg_key <- select(personalities, O2, O4, O6) %>% num_satisfy_neg()
 
+# O - P
+# C - U
+# E - I
+# A - D
+# N - S
 # report the results of the test for each person.
 personalities_results <-mutate(personalities,
                     is_e = (e_pos_key$satisfy_pos + e_neg_key$satisfy_neg) > 5,
@@ -39,3 +44,12 @@ personalities_results <-mutate(personalities,
                     is_c = (c_pos_key$satisfy_pos + c_neg_key$satisfy_neg) > 5,
                     is_n = (n_pos_key$satisfy_pos + n_neg_key$satisfy_neg) > 5,
                     is_o = (o_pos_key$satisfy_pos + o_neg_key$satisfy_neg) > 5)
+results <- data.frame(
+  result_e = ifelse(personalities_results$is_e == TRUE, "E", "I"),
+  result_a = ifelse(personalities_results$is_a == TRUE, "A", "D"),
+  result_c = ifelse(personalities_results$is_c == TRUE, "C", "U"),
+  result_n = ifelse(personalities_results$is_n == TRUE, "N", "S"),
+  result_o = ifelse(personalities_results$is_o == TRUE, "O", "P")) %>%
+  mutate(traits = paste(results$result_e, results$result_a, results$result_c,
+                        results$result_n, results$result_o))
+personalities_results <- mutate(personalities_results, traits = results$traits)
