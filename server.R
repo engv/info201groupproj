@@ -1,17 +1,10 @@
 library(dplyr)
 library(plotly)
 library(ggplot2)
-<<<<<<< HEAD
-library(RColorBrewer)
-=======
 library(DT)
->>>>>>> b2210da3d581b07ab0438f83b0958067cc6b739e
 source("wrangle.R")
 server <- function(input, output) {
-<<<<<<< HEAD
-  
-=======
->>>>>>> b2210da3d581b07ab0438f83b0958067cc6b739e
+
   output$age_plot <- renderPlot({
     age_data <- filter(personalities_results, age <= input$age)
     ggplot(age_data, aes(x = traits, y = age, color = age)) +
